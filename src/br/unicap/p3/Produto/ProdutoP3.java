@@ -5,7 +5,7 @@ public class ProdutoP3 implements Comparable <ProdutoP3> {
     private String nome;
     private double preco;
     private int estoque;
-    
+    //Anginho palhaço;
     public ProdutoP3 (String C) { // construtor
         this.codigo = C;
     }
