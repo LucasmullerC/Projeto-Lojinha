@@ -4,7 +4,7 @@ import br.unicap.p3.Vendedor.*;
 import br.unicap.p3.Produto.ProdutoP3;
 public class ListaCarrinho {
     private LSESemRepetidos<Carrinho> listacarrinho;
-    
+    private double TotalPreço;
     public ListaCarrinho(){
         listacarrinho = new LSESemRepetidos<Carrinho>();
         
@@ -19,10 +19,14 @@ public class ListaCarrinho {
         preco = f.ObterPreço(cod);
         c.setPreco(preco);
         c.setQtd(qtd);
+        this.TotalPreço = this.TotalPreço + preço;
         listacarrinho.inserirNoFinal(c);
     }
     public void ExibirCarrinho(){
         listacarrinho.exibirTodos();
+    }
+    public double ExibirTotalPreço(){
+        return this.TotalPreço;
     }
     public void CofirmarCompra(String cod){
         
