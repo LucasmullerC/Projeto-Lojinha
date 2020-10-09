@@ -1,20 +1,28 @@
-
 package br.unicap.p3.Vendedor;
 import java.util.Scanner;
 import br.unicap.p3.Dados.LSESemRepetidos;
 import br.unicap.p3.Dados.ListadoProduto;
 import br.unicap.p3.Dados.VerificarCPF;
 import br.unicap.p3.Produto.ProdutoP3;
-public class Funcionário {
-	private LSESemRepetidos<ProdutoP3> gerenciar;
+public class Funcionario {
+    private ListadoProduto<ProdutoP3> gerenciar;
 	private LSESemRepetidos<Vendedor> verificar;
 
-	public Funcionário() {
-		gerenciar = new LSESemRepetidos<ProdutoP3>();
+        public Funcionario(){
+            gerenciar = new ListadoProduto<ProdutoP3>();
 		verificar = new LSESemRepetidos<Vendedor>();
-	}
-
-	public void LoginFuncionário() {
+        }
+        public double ObterPreÃ§o(String cod){
+            double preÃ§o;
+            ProdutoP3 p,aux;
+            p = new ProdutoP3(cod);
+            aux = gerenciar.AlterarValor(p);
+//Expetion Aqui
+            preÃ§o = aux.getPreco();
+            return preÃ§o;
+        }
+        
+        public void LoginFuncionario() {
 		Scanner input = new Scanner(System.in);
 		String cpf, senha;
 		boolean VC;
@@ -34,33 +42,34 @@ public class Funcionário {
 		if (Vef.getSenha().equals(senha)) {
 			System.out.print("Login efetuado com sucesso");
 		} else {
-			System.out.print("Não encontrado");
+			System.out.print("Nï¿½o encontrado");
 		}
 		int op;
 		do {
 
 			menuOpcoes();
-			System.out.println("Informe a opção: ");
+			System.out.println("Informe a opï¿½ï¿½o: ");
 			op = input.nextInt();
 			input.nextLine();
 			switch (op) {
 			case 1:
+                            
 				System.out.println("Digite o nome do produto: ");
 				
-				ListadoProduto.Cadastrar();
+				//ListadoProduto.Cadastrar();
 				break;
 			case 2:
-				ListadoProduto.Remover();
+				//ListadoProduto.Remover();
 				break;
 			case 3:
-				ListadoProduto.AlterarValor();
+				//ListadoProduto.AlterarValor();
 				break;
 
 			case 0:
 				System.out.println(" ");
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				System.out.println("Opï¿½ï¿½o invï¿½lida!");
 			}
 		} while (op != 0);
 	}
@@ -73,3 +82,5 @@ public class Funcionário {
 
 	}
 }
+
+

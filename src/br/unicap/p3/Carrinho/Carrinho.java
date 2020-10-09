@@ -27,7 +27,7 @@ public class Carrinho implements Comparable<Carrinho>{
 	}
 	@Override
 	public String toString() {
-		return "Código do Produto: " + this.Codigo + " Quantidade: " + this.Qtd + " Preço: " +this.Preco;
+		return "Cï¿½digo do Produto: " + this.Codigo + " Quantidade: " + this.Qtd + " Preï¿½o: " +this.Preco;
 	}
 
 	public int compareTo(Carrinho C) {

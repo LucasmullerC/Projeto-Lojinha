@@ -35,7 +35,7 @@ public class ListadoProduto<T extends Comparable<T>> {
 				atual = this.inicio;
 				while (true) {
 					if (atual.getInfo().compareTo(obj) == 0) {
-						System.out.println("Valor repetido! Inserção não efetuada");
+						System.out.println("Valor repetido! Inserï¿½ï¿½o nï¿½o efetuada");
 						return;
 					} else if (atual.getInfo().compareTo(obj) > 0) {
 						anterior.setProx(novo);
@@ -54,7 +54,7 @@ public class ListadoProduto<T extends Comparable<T>> {
 	public void Remover(T obj) {
 		LSENode<T> aux, anterior, atual;
 		if (this.isEmpty() == true) {
-			System.out.println("Lista está vazia");
+			System.out.println("Lista estï¿½ vazia");
 		} else if (this.inicio.getInfo().compareTo(obj) == 0) {
 			if (this.qtd == 1) {
 				this.inicio = null;
@@ -63,7 +63,7 @@ public class ListadoProduto<T extends Comparable<T>> {
 				this.inicio = this.inicio.getProx();
 			}
 			this.qtd--;
-			System.out.println("Remoção efetuada!");
+			System.out.println("Remoï¿½ï¿½o efetuada!");
 		} else if (this.fim.getInfo().compareTo(obj) == 0) {
 			aux = this.inicio;
 			while (aux.getProx() != this.fim) {
@@ -72,7 +72,7 @@ public class ListadoProduto<T extends Comparable<T>> {
 			aux.setProx(null);
 			this.fim = aux;
 			this.qtd--;
-			System.out.println("Remoção efetuada!");
+			System.out.println("Remoï¿½ï¿½o efetuada!");
 		} else {
 			anterior = this.inicio;
 			atual = anterior.getProx();
@@ -80,13 +80,13 @@ public class ListadoProduto<T extends Comparable<T>> {
 				if (atual.getInfo().compareTo(obj) == 0) {
 					anterior.setProx(atual.getProx());
 					this.qtd--;
-					System.out.println("Remoção efetuada!");
+					System.out.println("Remoï¿½ï¿½o efetuada!");
 					return;
 				}
 				anterior = anterior.getProx();
 				atual = atual.getProx();
 			}
-			System.out.println("Elemento não encontrado!");
+			System.out.println("Elemento nï¿½o encontrado!");
 		}
 	}
 
@@ -122,12 +122,12 @@ public class ListadoProduto<T extends Comparable<T>> {
 
 		aux = this.BuscaMelhorada(obj);
 		if (aux == null) {
-			System.out.println("Produto não encontrado");
+			System.out.println("Produto nï¿½o encontrado");
 		} else {
 			System.out.println(aux.getInfo());
 		}
 	}
-
+//Este nome nÃ£o faz sentido nenhum
 	public T AlterarValor(T obj) { // busca sequencia melhorada que procura o objeto para alterar
 		LSENode<T> aux;
 		aux = this.inicio;
