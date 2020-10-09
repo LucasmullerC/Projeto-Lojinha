@@ -4,13 +4,11 @@ import br.unicap.p3.Vendedor.*;
 import br.unicap.p3.Produto.ProdutoP3;
 public class ListaCarrinho {
     private LSESemRepetidos<Carrinho> listacarrinho;
-    private double TotalPreço;
+    private double TotalPreco;
     public ListaCarrinho(){
         listacarrinho = new LSESemRepetidos<Carrinho>();
         
     }
-    
-    
     public void AdicionarNoCarrinho(String cod,int qtd){
          Funcionario f = new Funcionario();
         double preco;
@@ -19,14 +17,14 @@ public class ListaCarrinho {
         preco = f.ObterPreço(cod);
         c.setPreco(preco);
         c.setQtd(qtd);
-        this.TotalPreço = this.TotalPreço + preco;
+        this.TotalPreco = this.TotalPreco + preco;
         listacarrinho.inserirNoFinal(c);
     }
     public void ExibirCarrinho(){
         listacarrinho.exibirTodos();
     }
-    public double ExibirTotalPreço(){
-        return this.TotalPreço;
+    public double ExibirTotalPreco(){
+        return this.TotalPreco;
     }
     public void CofirmarCompra(String cod){
         
