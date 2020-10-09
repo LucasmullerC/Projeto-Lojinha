@@ -19,7 +19,7 @@ public class ListaCarrinho {
         preco = f.ObterPreço(cod);
         c.setPreco(preco);
         c.setQtd(qtd);
-        this.TotalPreço = this.TotalPreço + preço;
+        this.TotalPreço = this.TotalPreço + preco;
         listacarrinho.inserirNoFinal(c);
     }
     public void ExibirCarrinho(){
