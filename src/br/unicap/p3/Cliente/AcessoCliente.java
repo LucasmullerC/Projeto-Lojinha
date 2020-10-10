@@ -1,5 +1,7 @@
 package br.unicap.p3.Cliente;
 import java.util.Scanner;
+
+import br.unicap.p3.Aplicacao.AreaCliente;
 import br.unicap.p3.Dados.*;
 public class AcessoCliente {
 	LSESemRepetidos <Cliente> ListaCliente = new LSESemRepetidos();
@@ -18,6 +20,7 @@ public class AcessoCliente {
 		C = new Cliente(CPF);
 		C.setSenha(Senha);
 		ListaCliente.inserirNoFinal(C);
+		System.out.print("Cadastro efetuado com sucesso!");
 	}
 	public void Login () {
 		Scanner input = new Scanner (System.in);
@@ -35,6 +38,7 @@ public class AcessoCliente {
 		Vef = ListaCliente.BuscarObjeto(C);
 		if (Vef.getSenha().equals(Senha) && Vef != null) {	
 			System.out.print("Login efetuado com sucesso");
+			AreaCliente.AreadoCliente();
 		}
 		else {
 			System.out.print("Senha ou CPF inválido");

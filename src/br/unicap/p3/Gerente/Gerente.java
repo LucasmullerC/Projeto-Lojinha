@@ -1,10 +1,14 @@
 
 package br.unicap.p3.Gerente;
 import java.util.Scanner;
+
+import br.unicap.p3.Aplicacao.AreaVendedor;
+import br.unicap.p3.Aplicacao.Menus;
 import br.unicap.p3.Dados.*;
 import br.unicap.p3.Vendedor.Vendedor;
 public class Gerente {
 	private LSESemRepetidos<Vendedor> gerenciar;
+	
 
 	public Gerente() {
 		gerenciar = new LSESemRepetidos<Vendedor>();
@@ -22,8 +26,7 @@ public class Gerente {
 		}
 		int op;
 		do {
-
-			menuOpcoes();
+			Menus.MenuGerente();
 			System.out.println("Informe a opÁ„oo: ");
 			op = input.nextInt();
 			input.nextLine();
@@ -60,6 +63,13 @@ public class Gerente {
 		gerenciar.inserirNoFinal(v);
 		System.out.println("Vendedor contratado!");
 	}
+	public Vendedor BuscaVendedor (String CPF) {
+		Vendedor v;
+		Vendedor Vef;
+		v = new Vendedor(CPF);
+		Vef = gerenciar.BuscarObjeto(v);
+		return Vef;
+	}
 
 	public void exibirVendedores() {
 		gerenciar.exibirTodos();
@@ -90,19 +100,5 @@ public class Gerente {
 		} else {
 			System.out.print("N√£o encontrado");
 		}
-	}
-
-	public void menuOp2() {
-		System.out.println("1 - Gerente");
-		System.out.println("2 - Cliente");
-		System.out.println("3 - Vendedor");
-	}
-
-	public void menuOpcoes() {
-		System.out.println("1 - Contratar funcion√°rio  ");
-		System.out.println("2 - Demitir Funcion√°rio");
-		System.out.println("3 - Exibir Ganhos");
-		System.out.println("0 - Voltar ao Menu Principal");
-
 	}
 }

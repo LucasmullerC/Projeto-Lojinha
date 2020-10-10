@@ -20,12 +20,13 @@ public class ListaCarrinho {
         double preco;
         Carrinho c;
         c = new Carrinho(cod);
-        preco = f.ObterPreço(cod);
+        preco = f.ObterPreco(cod);
         c.setPreco(preco);
         c.setQtd(qtd);
         this.TotalPreco = this.TotalPreco + preco;
         listacarrinho.inserirNoFinal(c);
         this.QtdCompras++;
+        System.out.println("O produto foi adicionardo ao Carrinho!");
     }
 
     public void ExibirCarrinho() {

@@ -1,86 +1,141 @@
 package br.unicap.p3.Vendedor;
+
 import java.util.Scanner;
+
+import br.unicap.p3.Aplicacao.AreaCliente;
+import br.unicap.p3.Aplicacao.AreaVendedor;
+import br.unicap.p3.Aplicacao.Menus;
+import br.unicap.p3.Cliente.Cliente;
 import br.unicap.p3.Dados.LSESemRepetidos;
 import br.unicap.p3.Dados.ListadoProduto;
 import br.unicap.p3.Dados.VerificarCPF;
+import br.unicap.p3.Gerente.Gerente;
 import br.unicap.p3.Produto.ProdutoP3;
+
 public class Funcionario {
-    private ListadoProduto<ProdutoP3> gerenciar;
-	private LSESemRepetidos<Vendedor> verificar;
+	private ListadoProduto<ProdutoP3> gerenciar;
 
-        public Funcionario(){
-            gerenciar = new ListadoProduto<ProdutoP3>();
-		verificar = new LSESemRepetidos<Vendedor>();
-        }
-        public double ObterPreÃ§o(String cod){
-            double preÃ§o;
-            ProdutoP3 p,aux;
-            p = new ProdutoP3(cod);
-            aux = gerenciar.AlterarValor(p);
+	public Funcionario() {
+		gerenciar = new ListadoProduto<ProdutoP3>();
+	}
+
+	public double ObterPreco(String cod) {
+		double preco;
+		ProdutoP3 p, aux;
+		p = new ProdutoP3(cod);
+		aux = gerenciar.AlterarValor(p);
 //Expetion Aqui
-            preÃ§o = aux.getPreco();
-            return preÃ§o;
-        }
-        
-        public void LoginFuncionario() {
-		Scanner input = new Scanner(System.in);
-		String cpf, senha;
-		boolean VC;
+		preco = aux.getPreco();
+		return preco;
+	}
 
+	public void Catalogo() {
+		gerenciar.ExibirTodos();
+	}
+
+	public void LoginFuncionario() {
+		Scanner input = new Scanner(System.in);
+		AreaVendedor AV = new AreaVendedor();
+		Gerente G = new Gerente();
 		Vendedor v;
 		Vendedor Vef;
+		String CPF;
+		String Senha;
+		boolean vefC;
+		input.nextLine();
 		do {
 			System.out.print("Digite o seu CPF: ");
-			cpf = input.nextLine();
-			VC = VerificarCPF.VerificarConta(cpf);
-		}while (VC == false);
-		v = new Vendedor(cpf);
-		System.out.println("Digite a senha: ");
-		senha = input.nextLine();
-
-		Vef = verificar.BuscarObjeto(v);
-		if (Vef.getSenha().equals(senha)) {
+			CPF = input.nextLine();
+			vefC = VerificarCPF.VerificarConta(CPF);
+		}while (vefC == false);
+		System.out.print("Digite a sua senha: ");
+		Senha = input.nextLine();
+		Vef = G.BuscaVendedor(CPF);
+		System.out.println(Vef.getSenha());
+		if (Vef.getSenha().compareTo(Senha) == 0 && Vef != null) {	
 			System.out.print("Login efetuado com sucesso");
-		} else {
-			System.out.print("Nï¿½o encontrado");
+			AV.AreadoVendedor();
 		}
-		int op;
-		do {
-
-			menuOpcoes();
-			System.out.println("Informe a opï¿½ï¿½o: ");
+		else {
+			System.out.print("Senha ou CPF inválido");
+		}	
+	}
+	public void RemoverProduto() {
+		Scanner input = new Scanner (System.in);
+		String Codigo;
+		ProdutoP3 P;
+		ListadoProduto LP = new ListadoProduto();
+		System.out.println("Digite o código do produto: ");
+		Codigo = input.nextLine();
+		P = new ProdutoP3(Codigo);
+		LP.Remover(P);
+		System.out.println("Produto removido!");
+	}
+	public void AlterarProduto () {
+		Scanner input = new Scanner (System.in);
+		int op,qtd;
+		String Nome,Codigo;
+		double preco;
+		ProdutoP3 P, Result;
+		ListadoProduto LP = new ListadoProduto();
+		System.out.println("Digite o código do produto que deseja alterar: ");
+		Codigo = input.nextLine();
+		P = new ProdutoP3(Codigo);
+		Result =(ProdutoP3) LP.AlterarValor(P);
+		if (Result == null) {
+			System.out.println("Produto não encontrado");
+		}
+		else {
+			Menus.MenuAlterarProduto();
 			op = input.nextInt();
-			input.nextLine();
-			switch (op) {
+			switch(op) {
 			case 1:
-                            
-				System.out.println("Digite o nome do produto: ");
-				
-				//ListadoProduto.Cadastrar();
+				System.out.println("Digite o novo preço: ");
+				preco = input.nextDouble();
+				Result.setPreco(preco);
+				System.out.println("Produto alterado! ");
 				break;
 			case 2:
-				//ListadoProduto.Remover();
+				System.out.println("Digite o novo Estoque: ");
+				qtd = input.nextInt();
+				Result.setEstoque(qtd);
+				System.out.println("Produto alterado! ");
 				break;
 			case 3:
-				//ListadoProduto.AlterarValor();
-				break;
-
-			case 0:
-				System.out.println(" ");
+				System.out.println("Digite o novo preço: ");
+				preco = input.nextDouble();
+				Result.setPreco(preco);
+				System.out.println("Digite o novo Estoque: ");
+				qtd = input.nextInt();
+				Result.setEstoque(qtd);
+				System.out.println("Produto alterado! ");
 				break;
 			default:
-				System.out.println("Opï¿½ï¿½o invï¿½lida!");
+				System.out.println("Valor inválido.");
 			}
-		} while (op != 0);
+				
+		}
 	}
 
-	public void menuOpcoes() {
-		System.out.println("1 - Cadastrar Produtos  ");
-		System.out.println("2 - Excluir Produtos");
-		System.out.println("3 - Alterar Produtos ");
-		System.out.println("0 - Voltar ao Menu Principal");
-
+	public void CadastrarProduto() {
+		Scanner input = new Scanner (System.in);
+		int op,qtd;
+		String Nome,Codigo;
+		double preco;
+		ProdutoP3 P, Result;
+		ListadoProduto LP = new ListadoProduto();
+		System.out.println("Digite o nome do produto: ");
+		Nome = input.nextLine();
+		System.out.println("Digite o código do produto: ");
+		Codigo = input.nextLine();
+		System.out.println("Digite o preço do produto: ");
+		preco = input.nextDouble();
+		System.out.println("Digite a quantidade: ");
+		qtd = input.nextInt();
+		P = new ProdutoP3(Codigo);
+		P.setNome(Nome);
+		P.setPreco(preco);
+		P.setEstoque(qtd);
+		LP.Cadastrar(P);
 	}
 }
-
-

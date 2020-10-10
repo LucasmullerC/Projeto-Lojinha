@@ -2,7 +2,7 @@ package br.unicap.p3.Dados;
 public class VerificarCPF {
 	public static boolean VerificarConta(String C) {
 		if (C.length() != 11) {
-			System.out.println("Número da conta inválido. Informe exatamente 6 caracteres");
+			System.out.println("Número da conta inválido. Informe exatamente 11 caracteres");
 			return false;
 		} else if (VerificarContaNum(C) == false) {
 			System.out.println("Número de conta inválido. Informe apenas dígitos numéricos.");
