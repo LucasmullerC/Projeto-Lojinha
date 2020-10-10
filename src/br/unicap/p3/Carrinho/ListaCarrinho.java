@@ -3,10 +3,13 @@ package br.unicap.p3.Carrinho;
 import br.unicap.p3.Dados.*;
 import br.unicap.p3.Vendedor.*;
 import br.unicap.p3.Produto.ProdutoP3;
+import br.unicap.p3.Pedidos.RegistrarPedido;
+
 public class ListaCarrinho {
 
     private LSESemRepetidos<Carrinho> listacarrinho;
     private double TotalPreco;
+    private int QtdCompras;
 
     public ListaCarrinho() {
         listacarrinho = new LSESemRepetidos<Carrinho>();
@@ -22,6 +25,7 @@ public class ListaCarrinho {
         c.setQtd(qtd);
         this.TotalPreco = this.TotalPreco + preco;
         listacarrinho.inserirNoFinal(c);
+        this.QtdCompras++;
     }
 
     public void ExibirCarrinho() {
@@ -32,16 +36,21 @@ public class ListaCarrinho {
         return this.TotalPreco;
     }
 
-    public void CofirmarCompra(String cod) {
-    
+    public void CofirmarCompra() {
+        RegistrarPedido regis  = new RegistrarPedido();
+        Carrinho c;
+        for (int i = 0; i < this.QtdCompras; i++) {
+            c = listacarrinho.EnviarObjeto();
+           regis.RegistrarPedido(c);
+        }
+        this.QtdCompras = 0;
     }
+
     public void ExcluirCompra(String cod) {
         Carrinho c;
         c = new Carrinho(cod);
         listacarrinho.removerNo(c);
+        this.QtdCompras--;
     }
 
-
-    }
-
-
+}

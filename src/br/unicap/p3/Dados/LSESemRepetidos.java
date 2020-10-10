@@ -191,6 +191,19 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         System.out.println();
     }
 
-   
+    public T EnviarObjeto() {
+        LSENode<T> aux = this.inicio;
+        if (isEmpty() == true) {
+            System.out.println("Lista Vazia!");
+        } else if (aux.getProx() == null) {
+            this.inicio = null;
+            this.fim = null;
+            this.qtd = 0;
+        } else {
+            this.inicio = this.inicio.getProx();
+            this.qtd--;
+        }
+        return aux.getInfo();
+    }
 
 }
