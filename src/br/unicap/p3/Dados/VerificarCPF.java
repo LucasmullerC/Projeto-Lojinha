@@ -1,16 +1,17 @@
 package br.unicap.p3.Dados;
+
+import br.unicap.p3.Exceptions.*;
+
+
 public class VerificarCPF {
-	public static boolean VerificarConta(String C) {
+	public static boolean VerificarConta(String C) throws CPFInvalidoCaracterException, CPFInvalidoNumException {
 		if (C.length() != 11) {
-			System.out.println("Número da conta inválido. Informe exatamente 11 caracteres");
-			return false;
+			throw new CPFInvalidoCaracterException();
 		} else if (VerificarContaNum(C) == false) {
-			System.out.println("Número de conta inválido. Informe apenas dígitos numéricos.");
-			return false;
+			throw new CPFInvalidoNumException();
 		}
 		return true;
 	}
-
 	public static boolean VerificarContaNum(String C) {
 		int tam = C.length(), i;
 		char num;

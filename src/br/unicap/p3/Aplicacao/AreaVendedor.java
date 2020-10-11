@@ -1,5 +1,7 @@
 package br.unicap.p3.Aplicacao;
 
+import br.unicap.p3.Exceptions.ProdutosException;
+import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Produto.GerenciarProdutos;
 import java.util.Scanner;
 
@@ -7,7 +9,7 @@ import br.unicap.p3.Vendedor.Funcionario;
 
 public class AreaVendedor {
 
-    public static void Login() {
+    public static void Login() throws ProdutosException {
         Scanner input = new Scanner(System.in);
         int Opcao;
         Funcionario F = new Funcionario();
@@ -16,7 +18,11 @@ public class AreaVendedor {
             Opcao = input.nextInt();
             switch (Opcao) {
                 case 1:
-                    F.LoginFuncionario();
+				try {
+					F.LoginFuncionario();
+				} catch (SenhaCPFException e) {
+					e.printStackTrace();
+				}
                     break;
                 case 0:
                     break;
@@ -26,7 +32,7 @@ public class AreaVendedor {
         } while (Opcao != 0);
     }
 
-    public static void AreadoVendedor() {
+    public static void AreadoVendedor() throws ProdutosException {
         Scanner input = new Scanner(System.in);
         int Opcao;
         GerenciarProdutos GP = new GerenciarProdutos();

@@ -4,23 +4,31 @@ import java.util.Scanner;
 
 import br.unicap.p3.Aplicacao.AreaVendedor;
 import br.unicap.p3.Dados.VerificarCPF;
+import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
+import br.unicap.p3.Exceptions.CPFInvalidoNumException;
+import br.unicap.p3.Exceptions.ProdutosException;
+import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Gerente.Gerente;
 
 public class Funcionario {
 
-    public void LoginFuncionario() {
+    public void LoginFuncionario() throws ProdutosException, SenhaCPFException {
         Scanner input = new Scanner(System.in);
         AreaVendedor AV = new AreaVendedor();
         Gerente G = new Gerente();
         Vendedor Vef,v;
         String CPF;
         String Senha;
-        boolean vefC;
+        boolean vefC = false;
         input.nextLine();
         do {
             System.out.print("Digite o seu CPF: ");
             CPF = input.nextLine();
-            vefC = VerificarCPF.VerificarConta(CPF);
+            try {
+				vefC = VerificarCPF.VerificarConta(CPF);
+			} catch (CPFInvalidoCaracterException | CPFInvalidoNumException e) {
+				e.printStackTrace();
+			}
         } while (vefC == false);
         System.out.print("Digite a sua senha: ");
         Senha = input.nextLine();
@@ -32,7 +40,7 @@ public class Funcionario {
             System.out.println("Login efetuado com sucesso");
             AV.AreadoVendedor();
         } else {
-            System.out.println("Senha ou CPF inv�lido");
+        	throw new SenhaCPFException();
         }
     }
 }

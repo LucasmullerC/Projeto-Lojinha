@@ -1,5 +1,9 @@
 package br.unicap.p3.Dados;
 
+import br.unicap.p3.Exceptions.ListaVaziaException;
+import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
+import br.unicap.p3.Exceptions.ValorRepetidoException;
+
 public class LSESemRepetidos<T extends Comparable<T>> {
 
     private LSENode<T> inicio;
@@ -13,26 +17,6 @@ public class LSESemRepetidos<T extends Comparable<T>> {
             return false;
         }
     }
-
-    public void inserirNoInicio(T obj) {
-        LSENode<T> novo, aux;
-        novo = new LSENode(obj);
-        if (this.isEmpty() == true) {
-            this.inicio = novo;
-            this.fim = novo;
-            this.qtd++;
-        } else {
-            aux = this.buscaSimples(obj);
-            if (aux == null) {
-                novo.setProx(this.inicio);
-                this.inicio = novo;
-                this.qtd++;
-            } else {
-                System.out.println("Valor repetido!");
-            }
-        }
-    }
-
     private LSENode<T> buscaSimples(T obj) {
         LSENode<T> aux = this.inicio;
         while (aux != null) {
@@ -44,7 +28,7 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         return null;
     }
 
-    public void inserirNoFinal(T obj) {
+    public void inserirNoFinal(T obj) throws ValorRepetidoException {
         LSENode<T> novo, aux;
         novo = new LSENode(obj);
         if (this.isEmpty() == true) {
@@ -56,13 +40,13 @@ public class LSESemRepetidos<T extends Comparable<T>> {
                 this.fim.setProx(novo);
                 this.fim = novo;
             } else {
-                System.out.println("Valor repetido!");
+            	throw new ValorRepetidoException();
             }
         }
         this.qtd++;
     }
 
-    public void inserirOrdenado(T obj) {
+    public void inserirOrdenado(T obj) throws ValorRepetidoException {
         LSENode<T> novo = new LSENode(obj);
         LSENode<T> pos, anterior = null, atual;
         if (this.isEmpty() == true) {
@@ -85,8 +69,7 @@ public class LSESemRepetidos<T extends Comparable<T>> {
                 atual = this.inicio;
                 while (true) {
                     if (atual.getInfo().compareTo(obj) == 0) {
-                        System.out.println("Valor repetido! Inserção não efetuada");
-                        return;
+                    	throw new ValorRepetidoException();
                     } else if (atual.getInfo().compareTo(obj) > 0) {
                         anterior.setProx(novo);
                         novo.setProx(atual);
@@ -102,10 +85,10 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         }
     }
 
-    public void Remover(T obj) {
+    public void Remover(T obj) throws ListaVaziaException, ValorNaoEncontradoException {
         LSENode<T> aux, anterior, atual;
         if (this.isEmpty() == true) {
-            System.out.println("Lista está vazia");
+        	throw new ListaVaziaException();
         } else if (this.inicio.getInfo().compareTo(obj) == 0) {
             if (this.qtd == 1) {
                 this.inicio = null;
@@ -137,15 +120,15 @@ public class LSESemRepetidos<T extends Comparable<T>> {
                 anterior = anterior.getProx();
                 atual = atual.getProx();
             }
-            System.out.println("Elemento não encontrado!");
+            throw new ValorNaoEncontradoException();
         }
     }
 
-    public void exibirDado(T obj) {
+    public void exibirDado(T obj) throws ValorNaoEncontradoException {
         LSENode<T> aux;
         aux = buscaSimples(obj);
         if (aux == null) {
-            System.out.println("Valor não encontrado.");
+        	throw new ValorNaoEncontradoException();
         } else {
             System.out.println(aux.getInfo());
         }
@@ -177,11 +160,10 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         System.out.println();
     }
 
-    public T EnviarObjeto() {
+    public T EnviarObjeto() throws ListaVaziaException {
         LSENode<T> aux = this.inicio;
         if (isEmpty() == true) {
-            System.out.println("Lista Vazia!");
-            return null;
+        	throw new ListaVaziaException();
         } else if (aux.getProx() == null) {
             this.inicio = null;
             this.fim = null;

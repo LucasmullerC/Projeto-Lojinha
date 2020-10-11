@@ -1,6 +1,7 @@
 package br.unicap.p3.Pedidos;
 
 import br.unicap.p3.Dados.LSESemRepetidos;
+import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Produto.Produto;
 
 public class ListaPedidos {
@@ -12,7 +13,11 @@ public class ListaPedidos {
     }
 
     public void AdicionarPedido(Produto p) {
-        listapedidos.inserirOrdenado(p);
+        try {
+			listapedidos.inserirOrdenado(p);
+		} catch (ValorRepetidoException e) {
+			e.printStackTrace();
+		}
     }
 
     public void HistoricoPedidos() {

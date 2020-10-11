@@ -1,6 +1,7 @@
 package br.unicap.p3.Carrinho;
 
 import br.unicap.p3.Dados.*;
+import br.unicap.p3.Exceptions.*;
 import br.unicap.p3.Pedidos.ListaPedidos;
 import br.unicap.p3.Produto.Produto;
 import br.unicap.p3.Produto.GerenciarProdutos;
@@ -15,13 +16,16 @@ public class Carrinho{
         listacarrinho = new LSESemRepetidos<Produto>();
     }
 
-    public void AdicionarNoCarrinho(String cod, int qtd) {
+    public void AdicionarNoCarrinho(String cod, int qtd) throws ProdutosException,QuantidadeIndisponivelException, ValorRepetidoException {
         GerenciarProdutos gp = new GerenciarProdutos();
         Produto p,result;
         p = new Produto(cod);
         result = gp.ObterProduto(cod);
+        if (result == null) {
+        	throw new ProdutosException();
+        }
         if(result.getEstoque() < qtd){
-            System.out.println("Quantidade indisponível no estoque!");
+            throw new QuantidadeIndisponivelException();
         }
         else{
             result.setEstoque(result.getEstoque() - qtd);
@@ -43,23 +47,41 @@ public class Carrinho{
         return this.TotalPreco;
     }
 
-    public void CofirmarCompra() {
-        Produto result;
+    public void CofirmarCompra() throws ProdutosException{
+        Produto result = null;
         for (int i = 0; i < this.QtdCompras; i++) {
-            result = listacarrinho.EnviarObjeto();
-            lista.AdicionarPedido(result);
+            try {
+				result = listacarrinho.EnviarObjeto();
+			} catch (ListaVaziaException e) {
+				e.printStackTrace();
+			}
+            if (result == null) {
+            	throw new ProdutosException();
+            }
+            else {
+            	lista.AdicionarPedido(result);
+            }
         }
         this.QtdCompras = 0;
     }
 
-    public void ExcluirCompra(String cod) {
+    public void ExcluirCompra(String cod) throws ProdutosException, ListaVaziaException{
         GerenciarProdutos gp = new GerenciarProdutos();
         Produto p,resultC,resultP;
         p = new Produto(cod);
         resultP = gp.ObterProduto(cod);
         resultC = listacarrinho.BuscarObjeto(p);
-        resultP.setEstoque(resultP.getEstoque() + resultC.getEstoque());
-        listacarrinho.Remover(p);
-        this.QtdCompras--;
+        if (resultP == null || resultC == null) {
+        	throw new ProdutosException();
+        }
+        else {
+        	resultP.setEstoque(resultP.getEstoque() + resultC.getEstoque());
+            try {
+				listacarrinho.Remover(p);
+			} catch (ValorNaoEncontradoException e) {
+				e.printStackTrace();
+			}
+            this.QtdCompras--;
+        }
     }
 }

@@ -2,6 +2,11 @@ package br.unicap.p3.Produto;
 
 import br.unicap.p3.Aplicacao.Menus;
 import br.unicap.p3.Dados.LSESemRepetidos;
+import br.unicap.p3.Exceptions.ListaVaziaException;
+import br.unicap.p3.Exceptions.ProdutosException;
+import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
+import br.unicap.p3.Exceptions.ValorRepetidoException;
+
 import java.util.Scanner;
 
 public class GerenciarProdutos {
@@ -15,7 +20,6 @@ public class GerenciarProdutos {
         Produto p, aux;
         p = new Produto(cod);
         aux = gerenciar.BuscarObjeto(p);
-        //Expetion Aqui
         return aux;
     }
 
@@ -30,11 +34,17 @@ public class GerenciarProdutos {
         System.out.println("Digite o c�digo do produto: ");
         Codigo = input.nextLine();
         P = new Produto(Codigo);
-        gerenciar.Remover(P);
+        try {
+			gerenciar.Remover(P);
+		} catch (ListaVaziaException e) {
+			e.printStackTrace();
+		} catch (ValorNaoEncontradoException e) {
+			e.printStackTrace();
+		}
         System.out.println("Produto removido!");
     }
 
-    public void AlterarProduto() {
+    public void AlterarProduto() throws ProdutosException{
         Scanner input = new Scanner(System.in);
         int op, qtd;
         String Codigo;
@@ -46,7 +56,7 @@ public class GerenciarProdutos {
         P = new Produto(Codigo);
         Result = gerenciar.BuscarObjeto(P);
         if (Result == null) {
-            System.out.println("Produto n�o encontrado");
+        	throw new ProdutosException();
         } else {
             Menus.MenuAlterarProduto();
             op = input.nextInt();
@@ -96,6 +106,10 @@ public class GerenciarProdutos {
         P.setNome(Nome);
         P.setPreco(preco);
         P.setEstoque(qtd);
-        gerenciar.inserirOrdenado(P);
+        try {
+			gerenciar.inserirOrdenado(P);
+		} catch (ValorRepetidoException e) {
+			e.printStackTrace();
+		}
     }
 }

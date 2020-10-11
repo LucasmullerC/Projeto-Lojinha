@@ -4,6 +4,11 @@ import java.util.Scanner;
 import br.unicap.p3.Aplicacao.Menus;
 import br.unicap.p3.Cliente.PessoaGeral;
 import br.unicap.p3.Dados.*;
+import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
+import br.unicap.p3.Exceptions.CPFInvalidoNumException;
+import br.unicap.p3.Exceptions.ListaVaziaException;
+import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
+import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Vendedor.Vendedor;
 
 public class Gerente {
@@ -13,7 +18,7 @@ public class Gerente {
         gerenciar = new LSESemRepetidos<PessoaGeral>();
     }
 
-    public void LoginGerente() {
+    public void LoginGerente() throws ListaVaziaException, ValorRepetidoException {
         Scanner input = new Scanner(System.in);
         int senha;
 
@@ -48,11 +53,11 @@ public class Gerente {
         } while (op != 0);
     }
 
-    public void Contratar() {
+    public void Contratar() throws ValorRepetidoException {
         Scanner input = new Scanner(System.in);
         Vendedor v;
         String cpf, senha;
-        System.out.println("Digite o cpf do novo funcionário: ");
+        System.out.println("Digite o CPF do novo funcionário: ");
         cpf = input.nextLine();
         System.out.println("Informe A senha: ");
         senha = input.nextLine();
@@ -73,17 +78,21 @@ public class Gerente {
         gerenciar.exibirTodos();
     }
 
-    public void Demitir() {
+    public void Demitir() throws ListaVaziaException {
         Scanner input = new Scanner(System.in);
         String cpf, senha;
-        boolean VC;
+        boolean VC = false;
 
         Vendedor v;
         Vendedor Vef;
         do {
             System.out.println("Digite o CPF do funcion�rio a ser demitido: ");
             cpf = input.nextLine();
-            VC = VerificarCPF.VerificarConta(cpf);
+            try {
+				VC = VerificarCPF.VerificarConta(cpf);
+			} catch (CPFInvalidoCaracterException | CPFInvalidoNumException e) {
+				e.printStackTrace();
+			}
         } while (VC == false);
         v = new Vendedor(cpf);
         System.out.println("Digite a senha: ");
@@ -91,7 +100,11 @@ public class Gerente {
 
         Vef = (Vendedor) gerenciar.BuscarObjeto(v);
         if (Vef.getSenha().equals(senha)) {
-            gerenciar.Remover(v);
+            try {
+				gerenciar.Remover(v);
+			} catch (ValorNaoEncontradoException e) {
+				e.printStackTrace();
+			}
             System.out.print("Funcionário Demitido");
 
         } else {
