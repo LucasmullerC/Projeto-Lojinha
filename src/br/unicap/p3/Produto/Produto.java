@@ -1,12 +1,12 @@
 package br.unicap.p3.Produto;
 
-public class ProdutoP3 implements Comparable <ProdutoP3> {
+public class Produto implements Comparable <Produto> {
+    private int estoque;
     private final String codigo;
     private String nome;
     private double preco;
-    private int estoque;
-    //Anginho palhaço;
-    public ProdutoP3 (String C) { // construtor
+    
+    public Produto (String C) { // construtor
         this.codigo = C;
     }
     
@@ -25,18 +25,18 @@ public class ProdutoP3 implements Comparable <ProdutoP3> {
     public double getPreco () {
         return this.preco;
     }
-    public void setEstoque (int e) {
+    public void setEstoque(int e) {
         this.estoque = e;
-    }   
-    public int getEstoque () {
+    }
+    public int getEstoque() {
         return this.estoque;
     }
     @Override
     public String toString () {
-        return "O produto " + this.nome + " de código " + this.codigo + " tem preço de R$ " + this.preco + " e tem " + this.estoque + " unidades no estoque";
+        return "O produto " + this.nome + " de cÃ³digo " + this.codigo + " tem preÃ§o de R$ " + this.preco + " e tem " + this.estoque + " unidades no estoque";
     }
     @Override
-    public int compareTo(ProdutoP3 p) {
+    public int compareTo(Produto p) {
         return this.codigo.compareTo(p.getCodigo());
     }
 }

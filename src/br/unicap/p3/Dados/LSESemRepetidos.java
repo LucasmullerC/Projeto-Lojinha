@@ -1,7 +1,5 @@
 package br.unicap.p3.Dados;
 
-import java.util.Scanner;
-
 public class LSESemRepetidos<T extends Comparable<T>> {
 
     private LSENode<T> inicio;
@@ -9,7 +7,7 @@ public class LSESemRepetidos<T extends Comparable<T>> {
     private int qtd;
 
     public boolean isEmpty() {
-        if (this.qtd == 0) {
+        if (this.inicio == null) {
             return true;
         } else {
             return false;
@@ -71,26 +69,29 @@ public class LSESemRepetidos<T extends Comparable<T>> {
             this.inicio = novo;
             this.fim = novo;
             this.qtd++;
+            System.out.println("Cadastro efetuado");
         } else {
             if (obj.compareTo(this.inicio.getInfo()) < 0) {
                 novo.setProx(this.inicio);
                 this.inicio = novo;
                 this.qtd++;
+                System.out.println("Cadastro efetuado");
             } else if (obj.compareTo(this.fim.getInfo()) > 0) {
                 this.fim.setProx(novo);
                 this.fim = novo;
                 this.qtd++;
+                System.out.println("Cadastro efetuado");
             } else {
                 atual = this.inicio;
                 while (true) {
                     if (atual.getInfo().compareTo(obj) == 0) {
-                        System.out.println("Valor repetido! Inser��o n�o efetuada");
+                        System.out.println("Valor repetido! Inserção não efetuada");
                         return;
                     } else if (atual.getInfo().compareTo(obj) > 0) {
                         anterior.setProx(novo);
                         novo.setProx(atual);
                         this.qtd++;
-                        System.out.println("Inser��o efetuada");
+                        System.out.println("Cadastro efetuado");
                         return;
                     } else {
                         anterior = atual;
@@ -101,46 +102,42 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         }
     }
 
-    public void removerNoInicio() {
+    public void Remover(T obj) {
+        LSENode<T> aux, anterior, atual;
         if (this.isEmpty() == true) {
-            System.out.println("Lista vazia!");
-        } else if (this.inicio.getProx() == null) {
-            this.inicio = null;
-            this.fim = null;
-            this.qtd = 0;
-        } else {
-            this.inicio = this.inicio.getProx();
+            System.out.println("Lista está vazia");
+        } else if (this.inicio.getInfo().compareTo(obj) == 0) {
+            if (this.qtd == 1) {
+                this.inicio = null;
+                this.fim = null;
+            } else {
+                this.inicio = this.inicio.getProx();
+            }
             this.qtd--;
-        }
-    }
-
-    public void removerNoFinal() {
-        int cont;
-        LSENode<T> aux = this.inicio;
-        if (this.isEmpty() == true) {
-            System.out.println("Lista vazia!");
-        } else if (this.inicio.getProx() == null) {
-            this.inicio = null;
-            this.fim = null;
-            this.qtd = 0;
-        } else {
-            for (cont = 1; cont <= this.qtd - 2; cont++) {
+            System.out.println("Remoção efetuada!");
+        } else if (this.fim.getInfo().compareTo(obj) == 0) {
+            aux = this.inicio;
+            while (aux.getProx() != this.fim) {
                 aux = aux.getProx();
             }
             aux.setProx(null);
             this.fim = aux;
             this.qtd--;
-        }
-    }
-
-    public void removerNo(T Valor) {
-        LSENode<T> aux;
-        aux = buscaSimples(Valor);
-        if (aux == null) {
-            System.out.println("Valor n�o encontrado.");
+            System.out.println("Remoção efetuada!");
         } else {
-            aux.setInfo(null);
-            this.qtd--;
+            anterior = this.inicio;
+            atual = anterior.getProx();
+            while (atual != null) {
+                if (atual.getInfo().compareTo(obj) == 0) {
+                    anterior.setProx(atual.getProx());
+                    this.qtd--;
+                    System.out.println("Remoção efetuada!");
+                    return;
+                }
+                anterior = anterior.getProx();
+                atual = atual.getProx();
+            }
+            System.out.println("Elemento não encontrado!");
         }
     }
 
@@ -148,7 +145,7 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         LSENode<T> aux;
         aux = buscaSimples(obj);
         if (aux == null) {
-            System.out.println("Valor n�o encontrado.");
+            System.out.println("Valor não encontrado.");
         } else {
             System.out.println(aux.getInfo());
         }
@@ -170,17 +167,6 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         }
     }
 
-    public void AlterarProduto(T obj) {
-        LSENode<T> aux;
-        aux = buscaSimples(obj);
-        if (aux == null) {
-            System.out.println("Objeto n�o encontrado");
-        } else {
-            aux.setInfo(obj);
-            System.out.println("Altera��o efetuada!");
-        }
-    }
-
     public void exibirTodos() {
         LSENode<T> aux;
         aux = this.inicio;
@@ -195,6 +181,7 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         LSENode<T> aux = this.inicio;
         if (isEmpty() == true) {
             System.out.println("Lista Vazia!");
+            return null;
         } else if (aux.getProx() == null) {
             this.inicio = null;
             this.fim = null;
@@ -205,5 +192,4 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         }
         return aux.getInfo();
     }
-
 }
