@@ -5,7 +5,6 @@ public class Menus {
 		System.out.println("1 - Cliente");
 		System.out.println("2 - Vendedor");
 		System.out.println("3 - Gerente");
-		System.out.println("4 - SubGerente");
 		System.out.println("0 - Sair");
 		System.out.println("Informe a opção: ");
 	}
@@ -61,27 +60,7 @@ public class Menus {
 		System.out.println("2 - Demitir FuncionÃ¡rio");
 		System.out.println("3 - Exibir Ganhos");
 		System.out.println("0 - Voltar ao Menu Principal");
-	}
-	public static void MenuSubGerente() {
-		System.out.println("1 - Contratar funcionario  ");
-		System.out.println("2 - Exibir Funcionarios");
-		System.out.println("0 - Voltar ao Menu Principal");
-	}
-	public static void MenuEspecial () {
-		 System.out.println("Você deseja ser um cliente especial?");
-	        System.out.println("1 - SIM");
-	        System.out.println("2 - NÃO");
-	}
-	public static void MenuEspecialLogin () {
-		 System.out.println("Você é um cliente especial?");
-	     System.out.println("1 - SIM");
-	     System.out.println("2 - NÃO");
-	}
-	public static void MenuProdutoRaro () {
-		 System.out.println("Escolha o tipo do produto:");
-	     System.out.println("1 - Produto Raro");
-	     System.out.println("2 - Produto Normal");
-	     System.out.println("3 - Produto Perecível");
+
 	}
 	
 

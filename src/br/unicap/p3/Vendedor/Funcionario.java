@@ -22,22 +22,22 @@ public class Funcionario {
         boolean vefC = false;
         input.nextLine();
         do {
-           System.out.print("Digite o seu CPF: ");
-           CPF = input.nextLine();
-           try {
+            System.out.print("Digite o seu CPF: ");
+            CPF = input.nextLine();
+            try {
 				vefC = VerificarCPF.VerificarConta(CPF);
 			} catch (CPFInvalidoCaracterException | CPFInvalidoNumException e) {
 				e.printStackTrace();
 			}
-       } while (vefC == false);
-       System.out.print("Digite a sua senha: ");
-       Senha = input.nextLine();
+        } while (vefC == false);
+        System.out.print("Digite a sua senha: ");
+        Senha = input.nextLine();
         v = new Vendedor(CPF);
         v.setSenha(Senha);
         Vef = G.BuscaVendedor(v);
         System.out.println(Vef.getSenha());
         if (Vef.getSenha().compareTo(Senha) == 0 && Vef != null) {
-           System.out.println("Login efetuado com sucesso");
+            System.out.println("Login efetuado com sucesso");
             AV.AreadoVendedor();
         } else {
         	throw new SenhaCPFException();
