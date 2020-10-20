@@ -1,6 +1,5 @@
 package br.unicap.p3.Gerente;
 import java.util.Scanner;
-
 import br.unicap.p3.Aplicacao.Menus;
 import br.unicap.p3.Cliente.PessoaGeral;
 import br.unicap.p3.Dados.*;
@@ -10,17 +9,12 @@ import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Vendedor.Vendedor;
-
-public class Gerente {
-    private LSESemRepetidos<PessoaGeral> gerenciar;
-
-    public Gerente() {
-        gerenciar = new LSESemRepetidos<PessoaGeral>();
-    }
-
+import br.unicap.p3.Dados.*;
+public class Gerente extends SubGerente{
     public void LoginGerente() throws ListaVaziaException, ValorRepetidoException {
         Scanner input = new Scanner(System.in);
         int senha;
+        Gerente G = new Gerente();
 
         System.out.println("Digite a sua senha: ");
         senha = input.nextInt();
@@ -38,7 +32,7 @@ public class Gerente {
                     Contratar();
                     break;
                 case 2:
-                    Demitir();
+                    G.Demitir();
                     break;
                 case 3:exibirVendedores();
 
@@ -52,33 +46,7 @@ public class Gerente {
             }
         } while (op != 0);
     }
-
-    public void Contratar() throws ValorRepetidoException {
-        Scanner input = new Scanner(System.in);
-        Vendedor v;
-        String cpf, senha;
-        System.out.println("Digite o CPF do novo funcionário: ");
-        cpf = input.nextLine();
-        System.out.println("Informe A senha: ");
-        senha = input.nextLine();
-        v = new Vendedor(cpf);
-        v.setSenha(senha);
-        gerenciar.inserirNoFinal(v);
-        System.out.println("Vendedor contratado!");
-    }
-
-    public Vendedor BuscaVendedor(Vendedor v) {
-        Vendedor Vef;
-        
-        Vef = (Vendedor) gerenciar.BuscarObjeto(v);
-        return Vef;
-    }
-
-    public void exibirVendedores() {
-        gerenciar.exibirTodos();
-    }
-
-    public void Demitir() throws ListaVaziaException {
+	public void Demitir() throws ListaVaziaException {
         Scanner input = new Scanner(System.in);
         String cpf, senha;
         boolean VC = false;
@@ -111,4 +79,5 @@ public class Gerente {
             System.out.print("Não encontrado");
         }
     }
+    
 }

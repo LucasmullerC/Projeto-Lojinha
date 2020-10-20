@@ -7,12 +7,14 @@ import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Gerente.Gerente;
+import br.unicap.p3.Gerente.SubGerente;
 public class Aplicacao {
 	public static void main(String[] args){
 		Scanner input = new Scanner (System.in);
 		int Opcao;
 		AreaVendedor AV = new AreaVendedor();
 		Gerente G = new Gerente();
+		SubGerente SG = new SubGerente();
 		do {
 			Menus.MenuInicio();
 			Opcao = input.nextInt();input.nextLine();
@@ -34,6 +36,12 @@ public class Aplicacao {
 					e.printStackTrace();
 				}
 				break;	
+			case 4:
+				try {
+					SG.LoginSubGerente();
+				} catch (ListaVaziaException | ValorRepetidoException e) {
+					e.printStackTrace();
+				}
 			case 0:
 				System.out.println("Saindo...");
 				break;

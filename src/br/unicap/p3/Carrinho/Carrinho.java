@@ -1,5 +1,6 @@
 package br.unicap.p3.Carrinho;
 
+import br.unicap.p3.Cliente.AcessoCliente;
 import br.unicap.p3.Dados.*;
 import br.unicap.p3.Exceptions.*;
 import br.unicap.p3.Pedidos.ListaPedidos;
@@ -9,6 +10,7 @@ import br.unicap.p3.Produto.GerenciarProdutos;
 public class Carrinho{
     private LSESemRepetidos<Produto> listacarrinho;
     private ListaPedidos lista = new ListaPedidos();
+    private AcessoCliente Acessar = new AcessoCliente();
     private double TotalPreco;
     private int QtdCompras;
 
@@ -58,7 +60,10 @@ public class Carrinho{
             if (result == null) {
             	throw new ProdutosException();
             }
-            else {
+            else {      	
+            	if (Acessar.VerificaCliente() == true) {
+            		Acessar.AdicionaPonto();
+            	}
             	lista.AdicionarPedido(result);
             }
         }
