@@ -1,4 +1,4 @@
-package br.unicap.p3.Dados;
+package br.unicap.p3.Model;
 
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;

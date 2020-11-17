@@ -1,11 +1,12 @@
-package br.unicap.p3.Produto;
+package br.unicap.p3.Controle;
 
-import br.unicap.p3.Aplicacao.Menus;
-import br.unicap.p3.Dados.LSESemRepetidos;
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.Produto;
+import br.unicap.p3.View.Menus;
 
 import java.util.Scanner;
 

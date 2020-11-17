@@ -1,15 +1,16 @@
-package br.unicap.p3.Gerente;
+package br.unicap.p3.Controle;
 import java.util.Scanner;
 
-import br.unicap.p3.Aplicacao.Menus;
-import br.unicap.p3.Cliente.PessoaGeral;
-import br.unicap.p3.Dados.*;
+
 import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
 import br.unicap.p3.Exceptions.CPFInvalidoNumException;
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
-import br.unicap.p3.Vendedor.Vendedor;
+import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.PessoaGeral;
+import br.unicap.p3.Model.Vendedor;
+import br.unicap.p3.View.Menus;
 
 public class Gerente {
     private LSESemRepetidos<PessoaGeral> gerenciar;

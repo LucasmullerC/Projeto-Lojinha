@@ -1,4 +1,4 @@
-package br.unicap.p3.Cliente;
+package br.unicap.p3.Model;
 
 public class Cliente extends PessoaGeral{
     public Cliente(String c) { // construtor

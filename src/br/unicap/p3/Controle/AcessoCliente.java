@@ -1,8 +1,7 @@
-package br.unicap.p3.Cliente;
+package br.unicap.p3.Controle;
 import java.util.Scanner;
 
-import br.unicap.p3.Aplicacao.AreaCliente;
-import br.unicap.p3.Dados.*;
+
 import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
 import br.unicap.p3.Exceptions.CPFInvalidoNumException;
 import br.unicap.p3.Exceptions.ListaVaziaException;
@@ -10,6 +9,10 @@ import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.Cliente;
+import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.PessoaGeral;
+import br.unicap.p3.View.AreaCliente;
 public class AcessoCliente {
     LSESemRepetidos<PessoaGeral> ListaCliente = new LSESemRepetidos();
     Cliente C;

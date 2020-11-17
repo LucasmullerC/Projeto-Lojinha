@@ -1,14 +1,13 @@
-package br.unicap.p3.Vendedor;
+package br.unicap.p3.Controle;
 
 import java.util.Scanner;
 
-import br.unicap.p3.Aplicacao.AreaVendedor;
-import br.unicap.p3.Dados.VerificarCPF;
 import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
 import br.unicap.p3.Exceptions.CPFInvalidoNumException;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
-import br.unicap.p3.Gerente.Gerente;
+import br.unicap.p3.Model.Vendedor;
+import br.unicap.p3.View.AreaVendedor;
 
 public class Funcionario {
 

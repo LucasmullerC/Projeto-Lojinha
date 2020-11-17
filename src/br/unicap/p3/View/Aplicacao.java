@@ -1,12 +1,12 @@
-package br.unicap.p3.Aplicacao;
+package br.unicap.p3.View;
 import java.util.Scanner;
 
+import br.unicap.p3.Controle.Gerente;
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
-import br.unicap.p3.Gerente.Gerente;
 public class Aplicacao {
 	public static void main(String[] args){
 		Scanner input = new Scanner (System.in);

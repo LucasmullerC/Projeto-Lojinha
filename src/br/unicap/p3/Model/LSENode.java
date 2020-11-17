@@ -1,4 +1,4 @@
-package br.unicap.p3.Dados;
+package br.unicap.p3.Model;
 
 class LSENode <T extends Comparable <T>>{ 
     private T info;

@@ -1,10 +1,13 @@
-package br.unicap.p3.Carrinho;
+package br.unicap.p3.Controle;
 
-import br.unicap.p3.Dados.*;
-import br.unicap.p3.Exceptions.*;
-import br.unicap.p3.Pedidos.ListaPedidos;
-import br.unicap.p3.Produto.Produto;
-import br.unicap.p3.Produto.GerenciarProdutos;
+
+import br.unicap.p3.Exceptions.ListaVaziaException;
+import br.unicap.p3.Exceptions.ProdutosException;
+import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
+import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
+import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.Produto;
 
 public class Carrinho{
     private LSESemRepetidos<Produto> listacarrinho;

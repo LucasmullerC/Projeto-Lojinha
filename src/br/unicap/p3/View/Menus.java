@@ -1,4 +1,4 @@
-package br.unicap.p3.Aplicacao;
+package br.unicap.p3.View;
 public class Menus {
 	public static void MenuInicio () {
 		System.out.println("Bem-Vindo a Lojinha!");

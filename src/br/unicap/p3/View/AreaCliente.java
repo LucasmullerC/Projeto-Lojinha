@@ -1,15 +1,16 @@
-package br.unicap.p3.Aplicacao;
+package br.unicap.p3.View;
 
 import java.util.Scanner;
-import br.unicap.p3.Carrinho.Carrinho;
-import br.unicap.p3.Cliente.AcessoCliente;
+
+import br.unicap.p3.Controle.AcessoCliente;
+import br.unicap.p3.Controle.Carrinho;
+import br.unicap.p3.Controle.GerenciarProdutos;
+import br.unicap.p3.Controle.ListaPedidos;
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
-import br.unicap.p3.Pedidos.ListaPedidos;
-import br.unicap.p3.Produto.GerenciarProdutos;
 
 public class AreaCliente {
     public static void Login() {

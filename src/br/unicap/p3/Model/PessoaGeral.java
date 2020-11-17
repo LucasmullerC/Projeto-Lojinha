@@ -1,4 +1,4 @@
-package br.unicap.p3.Cliente;
+package br.unicap.p3.Model;
 
 public abstract class PessoaGeral implements Comparable<PessoaGeral> {
     private String cpf;

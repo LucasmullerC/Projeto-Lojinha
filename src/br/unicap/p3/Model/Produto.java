@@ -1,4 +1,4 @@
-package br.unicap.p3.Produto;
+package br.unicap.p3.Model;
 
 public class Produto implements Comparable <Produto> {
     private int estoque;

@@ -1,11 +1,11 @@
-package br.unicap.p3.Aplicacao;
+package br.unicap.p3.View;
 
+import br.unicap.p3.Controle.Funcionario;
+import br.unicap.p3.Controle.GerenciarProdutos;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
-import br.unicap.p3.Produto.GerenciarProdutos;
-import java.util.Scanner;
 
-import br.unicap.p3.Vendedor.Funcionario;
+import java.util.Scanner;
 
 public class AreaVendedor {
 

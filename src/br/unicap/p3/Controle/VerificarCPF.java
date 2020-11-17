@@ -1,6 +1,7 @@
-package br.unicap.p3.Dados;
+package br.unicap.p3.Controle;
 
-import br.unicap.p3.Exceptions.*;
+import br.unicap.p3.Exceptions.CPFInvalidoCaracterException;
+import br.unicap.p3.Exceptions.CPFInvalidoNumException;
 
 
 public class VerificarCPF {

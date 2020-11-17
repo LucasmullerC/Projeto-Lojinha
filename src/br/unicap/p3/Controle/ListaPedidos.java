@@ -1,8 +1,8 @@
-package br.unicap.p3.Pedidos;
+package br.unicap.p3.Controle;
 
-import br.unicap.p3.Dados.LSESemRepetidos;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
-import br.unicap.p3.Produto.Produto;
+import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.Produto;
 
 public class ListaPedidos {
 

@@ -1,6 +1,4 @@
-package br.unicap.p3.Vendedor;
-
-import br.unicap.p3.Cliente.PessoaGeral;
+package br.unicap.p3.Model;
 
 public class Vendedor extends PessoaGeral {
     public Vendedor (String C) { // construtor
