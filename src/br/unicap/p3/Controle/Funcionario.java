@@ -8,13 +8,14 @@ import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Model.Vendedor;
 import br.unicap.p3.View.AreaVendedor;
+import br.unicap.p3.View.FachadaView;
 
 public class Funcionario {
+	private FachadaControle FC = FachadaControle.getObjeto();;
+	private FachadaView FV = FachadaView.getObjeto();;
 
     public void LoginFuncionario() throws ProdutosException, SenhaCPFException {
         Scanner input = new Scanner(System.in);
-        AreaVendedor AV = new AreaVendedor();
-        Gerente G = new Gerente();
         Vendedor Vef,v;
         String CPF;
         String Senha;
@@ -33,11 +34,11 @@ public class Funcionario {
         Senha = input.nextLine();
         v = new Vendedor(CPF);
         v.setSenha(Senha);
-        Vef = G.BuscaVendedor(v);
+        Vef = FC.BuscaVendedor(v);
         System.out.println(Vef.getSenha());
         if (Vef.getSenha().compareTo(Senha) == 0 && Vef != null) {
             System.out.println("Login efetuado com sucesso");
-            AV.AreadoVendedor();
+            FV.AreadoVendedor();
         } else {
         	throw new SenhaCPFException();
         }

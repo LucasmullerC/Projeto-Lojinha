@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import br.unicap.p3.Controle.AcessoCliente;
 import br.unicap.p3.Controle.Carrinho;
+import br.unicap.p3.Controle.FachadaControle;
 import br.unicap.p3.Controle.GerenciarProdutos;
 import br.unicap.p3.Controle.ListaPedidos;
 import br.unicap.p3.Exceptions.ListaVaziaException;
@@ -13,17 +14,17 @@ import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 
 public class AreaCliente {
-    public static void Login() {
+	private FachadaControle FC = FachadaControle.getObjeto();
+    public void Login() {
         Scanner input = new Scanner(System.in);
         int Opcao;
-        AcessoCliente Cliente = new AcessoCliente();
         do {
             Menus.MenuLogin();
             Opcao = input.nextInt();
             switch (Opcao) {
                 case 1:
 				try {
-					Cliente.Login();
+					FC.LoginCliente();
 				} catch (ProdutosException | QuantidadeIndisponivelException | SenhaCPFException
 						| ValorRepetidoException | ListaVaziaException e) {
 					e.printStackTrace();
@@ -31,7 +32,7 @@ public class AreaCliente {
                     break;
                 case 2:
 				try {
-					Cliente.Cadastro();
+					FC.CadastroCliente();
 				} catch (ValorRepetidoException e) {
 					e.printStackTrace();
 				}
@@ -44,11 +45,10 @@ public class AreaCliente {
         } while (Opcao != 0);
     }
 
-    public static void AreadoCliente() throws ProdutosException, QuantidadeIndisponivelException, ValorRepetidoException, ListaVaziaException {
+    public void AreadoCliente() throws ProdutosException, QuantidadeIndisponivelException, ValorRepetidoException, ListaVaziaException {
         Scanner input = new Scanner(System.in);
         int Opcao, op, qtd;
         String codigo;
-        GerenciarProdutos GP = new GerenciarProdutos();
         Carrinho C = new Carrinho();
         do {
             Menus.MenuCliente();
@@ -56,7 +56,7 @@ public class AreaCliente {
             switch (Opcao) {
                 case 1:
                     do {
-                        GP.Catalogo();
+                        FC.Catalogo();
                         System.out.println("Digite o código do produto que deseja comprar: ");
                         codigo = input.nextLine();
                         System.out.println("Digite a quantidade: ");
@@ -81,8 +81,7 @@ public class AreaCliente {
         } while (Opcao != 0);
     }
 
-    public static void ControlePedido() {
-        ListaPedidos lista = new ListaPedidos();
+    public void ControlePedido() {
         Scanner in = new Scanner(System.in);
         int op;
         do {
@@ -91,7 +90,7 @@ public class AreaCliente {
             in.nextLine();
             switch (op) {
                 case 1:
-                    lista.HistoricoPedidos();
+                    FC.HistoricoPedidos();
                     break;
                 case 0:
                     System.out.println("Voltar");
@@ -103,9 +102,8 @@ public class AreaCliente {
         } while (op != 0);
     }
 
-    public static void ControleCarrinho() throws ProdutosException, ListaVaziaException {
+    public void ControleCarrinho() throws ProdutosException, ListaVaziaException {
         Scanner in = new Scanner(System.in);
-        Carrinho lista = new Carrinho();
         int op;
         double total;
         do {
@@ -114,19 +112,19 @@ public class AreaCliente {
             in.nextLine();
             switch (op) {
                 case 1:
-                    lista.ExibirCarrinho();
+                    FC.ExibirCarrinho();
                     break;
                 case 2:
-                    total = lista.ExibirTotalPreco();
+                    total = (double) FC.ExibirPrecoTotal();
                     System.out.println("R$: " + total);
                     break;
                 case 3:
                     System.out.print("Insira o codigo do produto que deseja retirar do Carrinho: ");
                     String cod = in.nextLine();
-                    lista.ExcluirCompra(cod);
+                    FC.ExcluirCompra(cod);
                     break;
                 case 4:
-                    lista.CofirmarCompra();
+                    FC.ConfirmarCompra();
                     break;
                 case 0:
                     System.out.println("Voltar");

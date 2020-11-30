@@ -6,24 +6,25 @@ import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.GerenciarLista;
 import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.Produto;
 
 public class Carrinho{
     private LSESemRepetidos<Produto> listacarrinho;
-    private ListaPedidos lista = new ListaPedidos();
+    private FachadaControle FC = FachadaControle.getObjeto();;
     private double TotalPreco;
     private int QtdCompras;
 
     public Carrinho() {
-        listacarrinho = new LSESemRepetidos<Produto>();
+    	GerenciarLista <Produto> GL = new GerenciarLista <Produto> ();
+        listacarrinho = GL.CriarLista();
     }
 
     public void AdicionarNoCarrinho(String cod, int qtd) throws ProdutosException,QuantidadeIndisponivelException, ValorRepetidoException {
-        GerenciarProdutos gp = new GerenciarProdutos();
         Produto p,result;
         p = new Produto(cod);
-        result = gp.ObterProduto(cod);
+        result = FC.ObterProduto(cod);
         if (result == null) {
         	throw new ProdutosException();
         }
@@ -62,17 +63,16 @@ public class Carrinho{
             	throw new ProdutosException();
             }
             else {
-            	lista.AdicionarPedido(result);
+            	FC.AdicionarPedido(result);
             }
         }
         this.QtdCompras = 0;
     }
 
     public void ExcluirCompra(String cod) throws ProdutosException, ListaVaziaException{
-        GerenciarProdutos gp = new GerenciarProdutos();
         Produto p,resultC,resultP;
         p = new Produto(cod);
-        resultP = gp.ObterProduto(cod);
+        resultP = FC.ObterProduto(cod);
         resultC = listacarrinho.BuscarObjeto(p);
         if (resultP == null || resultC == null) {
         	throw new ProdutosException();

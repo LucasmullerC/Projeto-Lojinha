@@ -11,25 +11,24 @@ public class Aplicacao {
 	public static void main(String[] args){
 		Scanner input = new Scanner (System.in);
 		int Opcao;
-		AreaVendedor AV = new AreaVendedor();
-		Gerente G = new Gerente();
+		FachadaView FV = FachadaView.getObjeto();
 		do {
 			Menus.MenuInicio();
 			Opcao = input.nextInt();input.nextLine();
 			switch (Opcao) {
 			case 1:
-				AreaCliente.Login();
+				FV.LoginCliente();
 				break;
 			case 2:
 				try {
-					AV.Login();
+					FV.LoginVendedor();
 				} catch (ProdutosException e) {
 					e.printStackTrace();
 				}
 				break;
 			case 3:
 				try {
-					G.LoginGerente();
+					FV.LoginGerente();
 				} catch (ListaVaziaException | ValorRepetidoException e) {
 					e.printStackTrace();
 				}

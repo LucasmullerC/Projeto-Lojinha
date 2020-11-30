@@ -10,12 +10,21 @@ import br.unicap.p3.Exceptions.QuantidadeIndisponivelException;
 import br.unicap.p3.Exceptions.SenhaCPFException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Model.Cliente;
+import br.unicap.p3.Model.GerenciarLista;
 import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.PessoaGeral;
+import br.unicap.p3.Model.Produto;
 import br.unicap.p3.View.AreaCliente;
+import br.unicap.p3.View.FachadaView;
 public class AcessoCliente {
-    LSESemRepetidos<PessoaGeral> ListaCliente = new LSESemRepetidos();
+    LSESemRepetidos<PessoaGeral> ListaCliente;
     Cliente C;
+    private FachadaView FV = FachadaView.getObjeto();
+    
+    public AcessoCliente() {
+        GerenciarLista <PessoaGeral> GL = new GerenciarLista <PessoaGeral> ();
+        ListaCliente = GL.CriarLista();
+    }
 
     public void Cadastro() throws ValorRepetidoException {
         Scanner input = new Scanner(System.in);
@@ -59,7 +68,7 @@ public class AcessoCliente {
         Vef = (Cliente) ListaCliente.BuscarObjeto(C);
         if (Vef.getSenha().equals(Senha) && Vef != null) {
             System.out.println("Login efetuado com sucesso");
-            AreaCliente.AreadoCliente();
+            FV.AreadoCliente();
         } else {
         	throw new SenhaCPFException();
         }

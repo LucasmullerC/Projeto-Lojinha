@@ -4,6 +4,7 @@ import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.GerenciarLista;
 import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.Produto;
 import br.unicap.p3.View.Menus;
@@ -14,7 +15,8 @@ public class GerenciarProdutos {
     private LSESemRepetidos<Produto> gerenciar;
 
     public GerenciarProdutos() {
-        gerenciar = new LSESemRepetidos<Produto>();
+        GerenciarLista <Produto> GL = new GerenciarLista <Produto> ();
+        gerenciar = GL.CriarLista();
     }
 
     public Produto ObterProduto(String cod) {

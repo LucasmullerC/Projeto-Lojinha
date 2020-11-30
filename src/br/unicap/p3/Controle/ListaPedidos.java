@@ -1,6 +1,7 @@
 package br.unicap.p3.Controle;
 
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.GerenciarLista;
 import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.Produto;
 
@@ -9,7 +10,8 @@ public class ListaPedidos {
     private LSESemRepetidos<Produto> listapedidos;
 
     public ListaPedidos() {
-        listapedidos = new LSESemRepetidos<Produto>();
+    	GerenciarLista <Produto> GL = new GerenciarLista <Produto> ();
+        listapedidos = GL.CriarLista();
     }
 
     public void AdicionarPedido(Produto p) {

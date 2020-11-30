@@ -7,16 +7,20 @@ import br.unicap.p3.Exceptions.CPFInvalidoNumException;
 import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
+import br.unicap.p3.Model.GerenciarLista;
 import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.PessoaGeral;
+import br.unicap.p3.Model.Produto;
 import br.unicap.p3.Model.Vendedor;
 import br.unicap.p3.View.Menus;
 
 public class Gerente {
     private LSESemRepetidos<PessoaGeral> gerenciar;
+    private FachadaControle FC = FachadaControle.getObjeto();;
 
     public Gerente() {
-        gerenciar = new LSESemRepetidos<PessoaGeral>();
+    	GerenciarLista <PessoaGeral> GL = new GerenciarLista <PessoaGeral> ();
+        gerenciar = GL.CriarLista();
     }
 
     public void LoginGerente() throws ListaVaziaException, ValorRepetidoException {
@@ -90,7 +94,7 @@ public class Gerente {
             System.out.println("Digite o CPF do funcion�rio a ser demitido: ");
             cpf = input.nextLine();
             try {
-				VC = VerificarCPF.VerificarConta(cpf);
+				VC = FC.VerificarConta(cpf);
 			} catch (CPFInvalidoCaracterException | CPFInvalidoNumException e) {
 				e.printStackTrace();
 			}
