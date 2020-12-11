@@ -1,13 +1,15 @@
 package br.unicap.p3.Controle;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Model.GerenciarLista;
-import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.Produto;
 
 public class ListaPedidos {
 
-    private LSESemRepetidos<Produto> listapedidos;
+    private ArrayList<Produto> listapedidos;
 
     public ListaPedidos() {
     	GerenciarLista <Produto> GL = new GerenciarLista <Produto> ();
@@ -15,14 +17,14 @@ public class ListaPedidos {
     }
 
     public void AdicionarPedido(Produto p) {
-        try {
-			listapedidos.inserirOrdenado(p);
-		} catch (ValorRepetidoException e) {
-			e.printStackTrace();
-		}
+        listapedidos.add(p);
     }
 
     public void HistoricoPedidos() {
-        listapedidos.exibirTodos();
+    	Iterator iterator = listapedidos.iterator();
+    	while (iterator.hasNext()) {
+    		Produto obj = (Produto) iterator.next();
+    		System.out.println(obj);
+    	}
     }
 }

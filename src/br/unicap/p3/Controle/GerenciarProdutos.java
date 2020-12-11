@@ -5,59 +5,56 @@ import br.unicap.p3.Exceptions.ProdutosException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Model.GerenciarLista;
-import br.unicap.p3.Model.LSESemRepetidos;
+import br.unicap.p3.Model.PessoaGeral;
 import br.unicap.p3.Model.Produto;
 import br.unicap.p3.View.Menus;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class GerenciarProdutos {
-    private LSESemRepetidos<Produto> gerenciar;
+    private ArrayList<Produto> gerenciar;
+    int Code;
 
     public GerenciarProdutos() {
         GerenciarLista <Produto> GL = new GerenciarLista <Produto> ();
         gerenciar = GL.CriarLista();
     }
 
-    public Produto ObterProduto(String cod) {
-        Produto p, aux;
-        p = new Produto(cod);
-        aux = gerenciar.BuscarObjeto(p);
+    public Produto ObterProduto(int cod) {
+        Produto aux;
+        aux = gerenciar.get(cod);
         return aux;
     }
 
     public void Catalogo() {
-        gerenciar.exibirTodos();
+    	Iterator iterator = gerenciar.iterator();
+    	while (iterator.hasNext()) {
+    		Produto obj = (Produto) iterator.next();
+    		System.out.println(obj);
+    	}
     }
 
     public void RemoverProduto() {
         Scanner input = new Scanner(System.in);
-        String Codigo;
-        Produto P;
+        int Codigo;
         System.out.println("Digite o cï¿½digo do produto: ");
-        Codigo = input.nextLine();
-        P = new Produto(Codigo);
-        try {
-			gerenciar.Remover(P);
-		} catch (ListaVaziaException e) {
-			e.printStackTrace();
-		} catch (ValorNaoEncontradoException e) {
-			e.printStackTrace();
-		}
+        Codigo = input.nextInt();
+        gerenciar.remove(Codigo);
         System.out.println("Produto removido!");
     }
 
     public void AlterarProduto() throws ProdutosException{
         Scanner input = new Scanner(System.in);
         int op, qtd;
-        String Codigo;
+        int Codigo;
         double preco;
-        Produto P, Result;
-        LSESemRepetidos LP = new LSESemRepetidos();
+        Produto Result;
         System.out.println("Digite o cï¿½digo do produto que deseja alterar: ");
-        Codigo = input.nextLine();
-        P = new Produto(Codigo);
-        Result = gerenciar.BuscarObjeto(P);
+        Codigo = input.nextInt();
+        Result = gerenciar.get(Codigo);
         if (Result == null) {
         	throw new ProdutosException();
         } else {
@@ -94,25 +91,22 @@ public class GerenciarProdutos {
     public void CadastrarProduto() {
         Scanner input = new Scanner(System.in);
         int qtd;
-        String Nome, Codigo;
+        String Nome;
         double preco;
         Produto P;
         System.out.println("Digite o nome do produto: ");
         Nome = input.nextLine();
-        System.out.println("Digite o cï¿½digo do produto: ");
-        Codigo = input.nextLine();
+        Code++;
         System.out.println("Digite o preï¿½o do produto: ");
         preco = input.nextDouble();
         System.out.println("Digite a quantidade: ");
         qtd = input.nextInt();
-        P = new Produto(Codigo);
+        P = new Produto(Code);
         P.setNome(Nome);
         P.setPreco(preco);
         P.setEstoque(qtd);
-        try {
-			gerenciar.inserirOrdenado(P);
-		} catch (ValorRepetidoException e) {
-			e.printStackTrace();
-		}
+        System.out.println("O código do produto é " +Code);
+        gerenciar.add(P);
+        Carrinho.setList(gerenciar);
     }
 }

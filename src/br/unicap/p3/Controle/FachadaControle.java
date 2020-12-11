@@ -35,8 +35,8 @@ public class FachadaControle {
 		AC.Login();
 	}
 	//carrinho
-	public void AdicionarnoCarrinho (String cod, int qtd) throws ProdutosException, QuantidadeIndisponivelException, ValorRepetidoException {
-		C.AdicionarNoCarrinho(cod, qtd);
+	public void AdicionarnoCarrinho (int codigo, int qtd) throws ProdutosException, QuantidadeIndisponivelException, ValorRepetidoException {
+		C.AdicionarNoCarrinho(codigo, qtd);
 	}
 	public void ExibirCarrinho () {
 		C.ExibirCarrinho();
@@ -47,15 +47,18 @@ public class FachadaControle {
 	public void ConfirmarCompra () throws ProdutosException {
 		C.CofirmarCompra();
 	}
-	public void ExcluirCompra (String cod) throws ProdutosException, ListaVaziaException {
+	public void ExcluirCompra (int cod) throws ProdutosException, ListaVaziaException {
 		C.ExcluirCompra(cod);
 	}
 	//funcionario
 	public void LoginFuncionario () throws ProdutosException, SenhaCPFException {
 		F.LoginFuncionario();
 	}
+	public void UltimosAcessos() {
+		F.UltimosAcessos();
+	}
 	//GerenciarProdutos
-	public Produto ObterProduto (String cod) {
+	public Produto ObterProduto (int cod) {
 		return GP.ObterProduto(cod);
 	}
 	public void Catalogo () {
@@ -76,9 +79,6 @@ public class FachadaControle {
 	}
 	public void Contratar () throws ValorRepetidoException {
 		G.Contratar();
-	}
-	public Vendedor BuscaVendedor (Vendedor v) {
-		return G.BuscaVendedor(v);
 	}
 	public void ExibirVendedor () {
 		G.exibirVendedores();

@@ -24,6 +24,7 @@ public class AreaVendedor {
 				} catch (SenhaCPFException e) {
 					e.printStackTrace();
 				}
+				AreadoVendedor();
                     break;
                 case 0:
                     break;

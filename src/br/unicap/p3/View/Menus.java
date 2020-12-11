@@ -27,6 +27,7 @@ public class Menus {
 		System.out.println("0 - Sair");
 		 System.out.println("OpÁ„o:");
 	}
+
 	public static void MenuCarrinho() {
         System.out.println("1-Exibir produtos no Carrinho");
         System.out.println("2-Exibir a soma total dos produtos no Carrinho");
@@ -58,10 +59,12 @@ public class Menus {
 	public static void MenuGerente() {
 		System.out.println("1 - Contratar funcion√°rio  ");
 		System.out.println("2 - Demitir Funcion√°rio");
-		System.out.println("3 - Exibir Ganhos");
+		System.out.println("3 - Exibir Vendedores");
+		System.out.println("4 - Exibir Ultimos Acessos");
 		System.out.println("0 - Voltar ao Menu Principal");
 
 	}
+
 	
 
 }

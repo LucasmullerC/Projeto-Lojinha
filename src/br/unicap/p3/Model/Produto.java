@@ -2,15 +2,15 @@ package br.unicap.p3.Model;
 
 public class Produto implements Comparable <Produto> {
     private int estoque;
-    private final String codigo;
+    private final int codigo;
     private String nome;
     private double preco;
     
-    public Produto (String C) { // construtor
+    public Produto (int C) { // construtor
         this.codigo = C;
     }
     
-    public String getCodigo () {
+    public int getCodigo () {
         return this.codigo;
     }  
     public void setNome (String n){
@@ -37,6 +37,6 @@ public class Produto implements Comparable <Produto> {
     }
     @Override
     public int compareTo(Produto p) {
-        return this.codigo.compareTo(p.getCodigo());
+        return this.nome.compareTo(p.getNome());
     }
 }

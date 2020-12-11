@@ -29,6 +29,12 @@ public class AreaCliente {
 						| ValorRepetidoException | ListaVaziaException e) {
 					e.printStackTrace();
 				}
+				try {
+					AreadoCliente();
+				} catch (ProdutosException | QuantidadeIndisponivelException | ValorRepetidoException
+						| ListaVaziaException e1) {
+					e1.printStackTrace();
+				}
                     break;
                 case 2:
 				try {
@@ -48,7 +54,7 @@ public class AreaCliente {
     public void AreadoCliente() throws ProdutosException, QuantidadeIndisponivelException, ValorRepetidoException, ListaVaziaException {
         Scanner input = new Scanner(System.in);
         int Opcao, op, qtd;
-        String codigo;
+        int codigo;
         Carrinho C = new Carrinho();
         do {
             Menus.MenuCliente();
@@ -58,14 +64,14 @@ public class AreaCliente {
                     do {
                         FC.Catalogo();
                         System.out.println("Digite o código do produto que deseja comprar: ");
-                        codigo = input.nextLine();
+                        codigo = input.nextInt();
                         System.out.println("Digite a quantidade: ");
                         qtd = input.nextInt();input.nextLine();
-                        C.AdicionarNoCarrinho(codigo, qtd);
                         System.out.println("Deseja comprar outro produto?");
                         System.out.println("1 - SIM / 0 - NÃO");
                         op = input.nextInt();
                     } while (op != 0);
+                    FC.AdicionarnoCarrinho(codigo, qtd);
                     break;
                 case 2:
                     ControleCarrinho();
@@ -80,6 +86,7 @@ public class AreaCliente {
             }
         } while (Opcao != 0);
     }
+    
 
     public void ControlePedido() {
         Scanner in = new Scanner(System.in);
@@ -120,7 +127,7 @@ public class AreaCliente {
                     break;
                 case 3:
                     System.out.print("Insira o codigo do produto que deseja retirar do Carrinho: ");
-                    String cod = in.nextLine();
+                    int cod = in.nextInt();
                     FC.ExcluirCompra(cod);
                     break;
                 case 4:

@@ -3,10 +3,17 @@ package br.unicap.p3.Model;
 public abstract class PessoaGeral implements Comparable<PessoaGeral> {
     private String cpf;
     private String senha;
+    private int codigo;
 
     public PessoaGeral(String c) { // construtor
         this.cpf = c;
 
+    }
+    public void setCodigo(int Nc) {
+        this.codigo = Nc;
+    }
+    public int getCodigo() {
+        return this.codigo;
     }
 
     public void setCpf(String c) {

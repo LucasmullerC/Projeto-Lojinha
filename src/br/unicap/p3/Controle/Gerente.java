@@ -1,4 +1,6 @@
 package br.unicap.p3.Controle;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -8,15 +10,15 @@ import br.unicap.p3.Exceptions.ListaVaziaException;
 import br.unicap.p3.Exceptions.ValorNaoEncontradoException;
 import br.unicap.p3.Exceptions.ValorRepetidoException;
 import br.unicap.p3.Model.GerenciarLista;
-import br.unicap.p3.Model.LSESemRepetidos;
 import br.unicap.p3.Model.PessoaGeral;
 import br.unicap.p3.Model.Produto;
 import br.unicap.p3.Model.Vendedor;
 import br.unicap.p3.View.Menus;
 
 public class Gerente {
-    private LSESemRepetidos<PessoaGeral> gerenciar;
-    private FachadaControle FC = FachadaControle.getObjeto();;
+    private static ArrayList<PessoaGeral> gerenciar;
+    private FachadaControle FC = FachadaControle.getObjeto();
+    private int codigo;
 
     public Gerente() {
     	GerenciarLista <PessoaGeral> GL = new GerenciarLista <PessoaGeral> ();
@@ -45,42 +47,49 @@ public class Gerente {
                 case 2:
                     Demitir();
                     break;
-                case 3:exibirVendedores();
-
+                case 3:
+                	exibirVendedores();
                     break;
-
+                case 4: 
+                	HistoricoLogin ();
+                    break;
                 case 0:
                     System.out.println(" ");
                     break;
                 default:
-                    System.out.println("Op√ß√£o inv√°lida!");
+                    System.out.println("OpÁ„o inv·lida!");
             }
         } while (op != 0);
+    }
+    public void HistoricoLogin () {
+    	System.out.println("Lista de ultimos acessos: ");
+    	FC.UltimosAcessos();
     }
 
     public void Contratar() throws ValorRepetidoException {
         Scanner input = new Scanner(System.in);
         Vendedor v;
         String cpf, senha;
-        System.out.println("Digite o CPF do novo funcion√°rio: ");
+        System.out.println("Digite o CPF do novo funcion·rio: ");
         cpf = input.nextLine();
         System.out.println("Informe A senha: ");
         senha = input.nextLine();
         v = new Vendedor(cpf);
         v.setSenha(senha);
-        gerenciar.inserirNoFinal(v);
+        v.setCodigo(codigo);
+        gerenciar.add(v);
+        Funcionario.setList(gerenciar);
+        System.out.println("O cÛdigo de login do vendedor È " +codigo);
+        codigo++;
         System.out.println("Vendedor contratado!");
     }
 
-    public Vendedor BuscaVendedor(Vendedor v) {
-        Vendedor Vef;
-        
-        Vef = (Vendedor) gerenciar.BuscarObjeto(v);
-        return Vef;
-    }
-
     public void exibirVendedores() {
-        gerenciar.exibirTodos();
+    	Iterator iterator = gerenciar.iterator();
+    	while (iterator.hasNext()) {
+    		PessoaGeral obj = (PessoaGeral) iterator.next();
+    		System.out.println(obj);
+    	}
     }
 
     public void Demitir() throws ListaVaziaException {
@@ -102,14 +111,13 @@ public class Gerente {
         v = new Vendedor(cpf);
         System.out.println("Digite a senha: ");
         senha = input.nextLine();
+        
+        System.out.println("Digite o cÛdigo: ");
+        codigo = input.nextInt();
 
-        Vef = (Vendedor) gerenciar.BuscarObjeto(v);
+        Vef = (Vendedor) gerenciar.get(codigo);
         if (Vef.getSenha().equals(senha)) {
-            try {
-				gerenciar.Remover(v);
-			} catch (ValorNaoEncontradoException e) {
-				e.printStackTrace();
-			}
+            gerenciar.remove(codigo);
             System.out.print("Funcion√°rio Demitido");
 
         } else {
